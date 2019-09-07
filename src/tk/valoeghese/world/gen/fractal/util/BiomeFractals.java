@@ -8,6 +8,7 @@ import tk.valoeghese.world.gen.fractal.FractalAddBiome;
 import tk.valoeghese.world.gen.fractal.FractalAddClimate;
 import tk.valoeghese.world.gen.fractal.FractalAddSpecial;
 import tk.valoeghese.world.gen.fractal.FractalAddTemperature;
+import tk.valoeghese.world.gen.fractal.FractalAddVariants;
 import tk.valoeghese.world.gen.fractal.FractalContinent;
 import tk.valoeghese.world.gen.fractal.FractalCorrectPatches;
 import tk.valoeghese.world.gen.fractal.FractalCreateExtraLand;
@@ -40,7 +41,8 @@ public final class BiomeFractals {
 		FractalSampleFactory biome = FractalAddBiome.INSTANCE.create(infoProvider.apply(100L), continent);
 		biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
 		
-		biome = FractalAddVariants.
+		biome = FractalAddVariants.INSTANCE.create(infoProvider.apply(1000L), biome);
+		biome = FractalScale.SHAPING.create(infoProvider.apply(1000L), biome);
 		
 		return ArrayUtil.listOf(biome);
 	}
@@ -55,7 +57,7 @@ public final class BiomeFractals {
 	}
 	
 	public static CachingIntSampler[] build(long seed) {
-		List<FractalSampleFactory> factories = createFactories((salt) -> new FractalRandomProvider(25, seed, salt));
+		List<FractalSampleFactory> factories = createFactories((salt) -> new FractalRandomProvider(17, seed, salt));
 		
 		CachingIntSampler provider = factories.get(0).buildCaching(25);
 		
