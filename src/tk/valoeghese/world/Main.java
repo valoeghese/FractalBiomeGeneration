@@ -1,5 +1,7 @@
 package tk.valoeghese.world;
 
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -23,7 +25,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		setup();
 		
-		populator = new OverworldChunkPopulator(0L);
+		populator = new OverworldChunkPopulator(new Random().nextLong());
 		
 		launch(new String[0]);
 	}
