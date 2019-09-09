@@ -62,7 +62,7 @@ public final class BiomeFractals {
 		
 		// River
 		
-		FractalSampleFactory river = FractalRiverNoise.INSTANCE.create(infoProvider.apply(100L), continent);
+		FractalSampleFactory river = FractalRiverNoise.DENSE.create(infoProvider.apply(100L), continent);
 		river = repeatFractal(1001L, FractalScale.SHAPING, 5, river, infoProvider);
 		
 		river = FractalRiver.PREPARE.create(infoProvider.apply(0L), river);
