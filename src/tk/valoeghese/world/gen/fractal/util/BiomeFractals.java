@@ -51,7 +51,6 @@ public final class BiomeFractals {
 		biome = FractalScale.SHAPING.create(infoProvider.apply(1002L), biome);
 		
 		biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
-//		biome = FractalScale.REVERSE_BASIC.create(infoProvider.apply(1L), biome);
 		
 		return ArrayUtil.listOf(biome);
 	}

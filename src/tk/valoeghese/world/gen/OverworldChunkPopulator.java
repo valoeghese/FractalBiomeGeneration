@@ -5,6 +5,7 @@ import tk.valoeghese.world.gen.fractal.util.BiomeFractals;
 public class OverworldChunkPopulator extends WorldGenerator {
 	
 	private final IntSampler provider;
+	
 	public OverworldChunkPopulator(long seed) {
 		super("overworld");
 		
