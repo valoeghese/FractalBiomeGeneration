@@ -3,7 +3,6 @@ package tk.valoeghese.world.gen.fractal.util;
 public final class FractalRandomProvider implements FractalSamplerInfo<FractalRandomProvider.Instance> {
 	
 	private long initSeed;
-	private long seed;
 	private int capacity;
 	
 	public FractalRandomProvider(int capacity, long seed, long salt) {
@@ -34,13 +33,13 @@ public final class FractalRandomProvider implements FractalSamplerInfo<FractalRa
 	
 	@Override
 	public Instance create(int x, int z) {
-		long localSeed = seed;
+		long localSeed = initSeed;
 		localSeed += x;
 		localSeed *= 3412375462423L * localSeed + 834672456235L;
 		localSeed += z;
 		localSeed *= 3412375462423L * localSeed + 834672456235L;
 		
-		return new Instance(localSeed, seed);
+		return new Instance(localSeed, initSeed);
 	}
 	
 	public static class Instance implements FractalRandom {

@@ -6,14 +6,16 @@ import java.util.function.LongFunction;
 import tk.valoeghese.world.gen.CachingIntSampler;
 import tk.valoeghese.world.gen.fractal.FractalAddBiome;
 import tk.valoeghese.world.gen.fractal.FractalAddClimate;
+import tk.valoeghese.world.gen.fractal.FractalAddShore;
 import tk.valoeghese.world.gen.fractal.FractalAddSpecial;
 import tk.valoeghese.world.gen.fractal.FractalAddTemperature;
 import tk.valoeghese.world.gen.fractal.FractalAddVariants;
 import tk.valoeghese.world.gen.fractal.FractalContinent;
 import tk.valoeghese.world.gen.fractal.FractalCorrectPatches;
 import tk.valoeghese.world.gen.fractal.FractalCreateExtraLand;
-import tk.valoeghese.world.gen.fractal.FractalRoughenContinent;
+import tk.valoeghese.world.gen.fractal.FractalModerateEdge;
 import tk.valoeghese.world.gen.fractal.FractalScale;
+import tk.valoeghese.world.gen.fractal.FractalShapeEdge;
 import tk.valoeghese.world.gen.fractal.type.ParentedFractal;
 import tk.valoeghese.world.util.ArrayUtil;
 
@@ -27,12 +29,12 @@ public final class BiomeFractals {
 		continent = FractalScale.BASIC.create(infoProvider.apply(0L), continent);
 		
 		continent = FractalCreateExtraLand.CREATE.create(infoProvider.apply(10L), continent);
-		continent = FractalRoughenContinent.INSTANCE.create(infoProvider.apply(11L), continent);
+		continent = FractalShapeEdge.INSTANCE.create(infoProvider.apply(11L), continent);
 		continent = FractalAddTemperature.INSTANCE.create(infoProvider.apply(12L), continent);
 		continent = FractalCorrectPatches.INSTANCE.create(infoProvider.apply(13L), continent);
 		continent = FractalScale.BASIC.create(infoProvider.apply(0L), continent);
 		
-		continent = FractalRoughenContinent.INSTANCE.create(infoProvider.apply(20L), continent);
+		continent = FractalShapeEdge.INSTANCE.create(infoProvider.apply(20L), continent);
 		continent = FractalAddClimate.INSTANCE.create(infoProvider.apply(20L), continent);
 		continent = FractalCorrectPatches.INSTANCE.create(infoProvider.apply(20L), continent);
 		continent = FractalAddSpecial.INSTANCE.create(infoProvider.apply(21L), continent);
@@ -41,8 +43,15 @@ public final class BiomeFractals {
 		FractalSampleFactory biome = FractalAddBiome.INSTANCE.create(infoProvider.apply(100L), continent);
 		biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
 		
+		biome = FractalModerateEdge.INSTANCE.create(infoProvider.apply(1001L), biome);
 		biome = FractalAddVariants.INSTANCE.create(infoProvider.apply(1000L), biome);
-		biome = FractalScale.SHAPING.create(infoProvider.apply(1000L), biome);
+		
+		biome = repeatFractal(1000L, FractalScale.SHAPING, 2, biome, infoProvider);
+		biome = FractalAddShore.INSTANCE.create(infoProvider.apply(200L), biome);
+		biome = FractalScale.SHAPING.create(infoProvider.apply(1002L), biome);
+		
+		biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
+//		biome = FractalScale.REVERSE_BASIC.create(infoProvider.apply(1L), biome);
 		
 		return ArrayUtil.listOf(biome);
 	}

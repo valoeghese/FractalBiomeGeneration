@@ -17,6 +17,12 @@ public enum FractalScale implements ParentedFractal {
 		protected int chooseCentre(FractalRandom random, int directParent, int s, int e, int se) {
 			return random.chooseInt(directParent, s, e, se);
 		}
+	},
+	REVERSE_BASIC {
+		@Override
+		public int sample(FractalRandom random, IntSampler sampler, int x, int z) {
+			return sampler.sample(x >> 1 << 2, z >> 1 << 2);
+		}
 	};
 
 	@Override

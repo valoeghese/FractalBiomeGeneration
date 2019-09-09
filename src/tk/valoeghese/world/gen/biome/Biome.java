@@ -21,12 +21,16 @@ public class Biome {
 		return REVERSE.get(id);
 	}
 	
+	public Biome getShore() {
+		return BEACH;
+	}
+	
 	public static final Biome OCEAN = new Biome(0, Color.BLUE);
 	
 	// Warm Temperate
 	public static final Biome GRASSLAND = new Biome(1, Color.LAWNGREEN);
 	public static final Biome WOODLAND = new Biome(2, Color.FORESTGREEN);
-	public static final Biome SWAMP = new Biome(3, Color.PURPLE);
+	public static final Biome SWAMP = new ShorelessBiome(3, Color.PURPLE);
 	
 	// Desert
 	public static final Biome DESERT = new Biome(4, Color.rgb(230, 220, 100));
@@ -41,7 +45,7 @@ public class Biome {
 	public static final Biome MOOR = new Biome(9, Color.MEDIUMSPRINGGREEN);
 	
 	// Snow
-	public static final Biome TUNDRA = new Biome(10, Color.WHITE);
+	public static final Biome TUNDRA = new ShorelessBiome(10, Color.WHITE);
 	public static final Biome SNOW_TAIGA = new Biome(11, Color.LIGHTGREEN);
 	
 	// Special
@@ -50,4 +54,5 @@ public class Biome {
 	
 	// Variants and other biomes
 	public static final Biome PAINTED_DESERT = new Biome(14, Color.ROSYBROWN);
+	public static final Biome OASIS = new Biome(15, Color.MEDIUMTURQUOISE);
 }

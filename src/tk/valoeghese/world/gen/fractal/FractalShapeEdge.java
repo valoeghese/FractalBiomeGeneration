@@ -3,7 +3,7 @@ package tk.valoeghese.world.gen.fractal;
 import tk.valoeghese.world.gen.fractal.type.CrossModifierFractal;
 import tk.valoeghese.world.gen.fractal.util.FractalRandom;
 
-public enum FractalRoughenContinent implements CrossModifierFractal {
+public enum FractalShapeEdge implements CrossModifierFractal {
 	INSTANCE;
 
 	@Override
