@@ -3,6 +3,7 @@ package tk.valoeghese.world.gen.fractal.util;
 import java.util.List;
 import java.util.function.LongFunction;
 
+import tk.valoeghese.world.Main;
 import tk.valoeghese.world.gen.CachingIntSampler;
 import tk.valoeghese.world.gen.fractal.FractalAddBiome;
 import tk.valoeghese.world.gen.fractal.FractalAddClimate;
@@ -51,6 +52,7 @@ public final class BiomeFractals {
 		biome = FractalScale.SHAPING.create(infoProvider.apply(1002L), biome);
 		
 		biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
+		biome = repeatFractal(1L, FractalScale.REVERSE_BASIC, Main.zoom, biome, infoProvider);
 		
 		return ArrayUtil.listOf(biome);
 	}

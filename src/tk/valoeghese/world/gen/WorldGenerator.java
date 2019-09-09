@@ -28,4 +28,6 @@ public abstract class WorldGenerator {
 			return false;
 		}
 	}
+
+	public abstract void buildBiomes();
 }
