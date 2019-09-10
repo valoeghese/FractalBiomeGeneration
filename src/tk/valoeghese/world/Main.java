@@ -73,16 +73,16 @@ public class Main extends Application {
 		
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, k -> {
 			if (k.getCode() == KeyCode.UP) {
-				--zOff;
+				zOff = (zOff - (zoom + 1));
 				draw(pw, false);
 			} else if (k.getCode() == KeyCode.LEFT) {
-				--xOff;
+				xOff = (xOff - (zoom + 1));
 				draw(pw, false);
 			} else if (k.getCode() == KeyCode.DOWN) {
-				++zOff;
+				zOff = (zOff + (zoom + 1));
 				draw(pw, false);
 			} else if (k.getCode() == KeyCode.RIGHT) {
-				++xOff;
+				xOff = (xOff + (zoom + 1));
 				draw(pw, false);
 			} if (k.getCode() == KeyCode.Z && zoom < 3) {
 				++zoom;
