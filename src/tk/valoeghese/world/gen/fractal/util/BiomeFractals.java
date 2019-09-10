@@ -50,10 +50,10 @@ public final class BiomeFractals {
 		
 		// Biome
 		
-		FractalSampleFactory biome = FractalAddBiome.INSTANCE.create(infoProvider.apply(100L), continent);
-		biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
+		FractalSampleFactory biomeInit = FractalAddBiome.INSTANCE.create(infoProvider.apply(100L), continent);
+		biomeInit = repeatFractal(1001L, FractalScale.SHAPING, 2, biomeInit, infoProvider);
 		
-		biome = FractalModerateEdge.INSTANCE.create(infoProvider.apply(1001L), biome);
+		FractalSampleFactory biome = FractalModerateEdge.INSTANCE.create(infoProvider.apply(1001L), biomeInit);
 		biome = FractalAddVariants.INSTANCE.create(infoProvider.apply(1000L), biome);
 		
 		biome = repeatFractal(1000L, FractalScale.SHAPING, 2, biome, infoProvider);
@@ -62,16 +62,27 @@ public final class BiomeFractals {
 		
 		// River
 		
-		FractalSampleFactory river = FractalRiverNoise.DENSE.create(infoProvider.apply(100L), continent);
+		FractalSampleFactory river = FractalRiverNoise.SPARSE.create(infoProvider.apply(100L), continent);
 		river = repeatFractal(1001L, FractalScale.SHAPING, 5, river, infoProvider);
 		
 		river = FractalRiver.PREPARE.create(infoProvider.apply(0L), river);
 		river = FractalRiver.CREATE.create(infoProvider.apply(0L), river);
 		
+		// Small River
+		
+		FractalSampleFactory smallRiver = FractalRiverNoise.DENSE.create(infoProvider.apply(102L), continent);
+		smallRiver = repeatFractal(1002L, FractalScale.SHAPING, 6, smallRiver, infoProvider);
+		
+		smallRiver = FractalRiver.PREPARE.create(infoProvider.apply(0L), smallRiver);
+		smallRiver = FractalRiver.CREATE.create(infoProvider.apply(0L), smallRiver);
+		
 		// Combine factories and final scale
 		
 		biome = FractalAddRiver.INSTANCE.create(infoProvider.apply(101L), biome, river);
-		biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
+		//biome = repeatFractal(1001L, FractalScale.SHAPING, 2, biome, infoProvider);
+		biome = FractalScale.SHAPING.create(infoProvider.apply(1001L), biome);
+		biome = FractalAddRiver.INSTANCE.create(infoProvider.apply(103L), biome, smallRiver);
+		biome = FractalScale.SHAPING.create(infoProvider.apply(1002L), biome);
 		biome = repeatFractal(1L, FractalScale.REVERSE_BASIC, Main.zoom, biome, infoProvider);
 		
 		return ArrayUtil.listOf(biome);
